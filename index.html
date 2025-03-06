@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Home</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <style>
+        /* Parallax styling */
+        .parallax-hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+        
+        /* Add a dark overlay on top of the video */
+        .parallax-hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity as needed */
+            z-index: 1;
+        }
+        
+        .hero-content {
+            background-color: rgba(10, 10, 10, 0.7); /* Semi-transparent background */
+            padding: 2rem 3rem;
+            border-radius: 10px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            width: 800px; /* Fixed width instead of max-width */
+            position: relative;
+            z-index: 3; /* Increase z-index to appear above the overlay */
+            animation: fadeIn 2s ease-out;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid #6e44ff;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: profileFadeIn 1s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        @keyframes profileFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Typewriter effect styles */
+        .typewriter-text {
+            overflow: hidden;
+            margin: 0 auto;
+            display: inline-block;
+            position: relative;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #fff;
+            min-width: 300px; /* Set minimum width to prevent shrinking */
+            min-height: 60px; /* Set minimum height to prevent vertical jumping */
+            text-align: center; /* Center the text within the container */
+        }
+        
+        .typewriter-text::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background-color: #6e44ff;
+            animation: cursor-blink 1s step-end infinite;
+        }
+        
+        @keyframes cursor-blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        .description {
+            margin-top: 2rem;
+            font-size: 1.2rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .glitch-text {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            opacity: 0.8;
+        }
+        
+        /* Timeline Styles */
+        .timeline-section {
+            padding: 6rem 2rem;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: #6e44ff;
+        }
+        
+        .timeline {
+            position: relative;
+            padding: 4rem 0 2rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background-color: #6e44ff;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 6rem;
+            width: 100%;
+            padding-top: 3rem;
+        }
+        
+        .timeline-item:first-child {
+            padding-top: 1rem;
+        }
+        
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #6e44ff;
+            border: 4px solid #0a0a0a;
+            z-index: 1;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 0 0 rgba(110, 68, 255, 0.5);
+        }
+        
+        .timeline-dot:hover {
+            background-color: #fff;
+            transform: translateX(-50%) scale(1.2);
+            box-shadow: 0 0 0 8px rgba(110, 68, 255, 0.3);
+        }
+        
+        .timeline-date {
+            position: absolute;
+            top: -35px;
+            left: 0;
+            right: 0;
+            width: fit-content;
+            margin: auto;
+            background-color: rgba(110, 68, 255, 0.1);
+            color: #6e44ff;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 500;
+            text-align: center;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+        
+        .timeline-item:hover .timeline-date {
+            background-color: rgba(110, 68, 255, 0.3);
+            transform: translateY(-5px);
+        }
+        
+        .timeline-content {
+            position: relative;
+            width: calc(50% - 60px);
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            margin-left: auto;
+            margin-right: 60px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-content {
+            transform: translateX(-50px) translateY(50px);
+        }
+        
+        .timeline-item:nth-child(even) .timeline-content {
+            transform: translateX(50px) translateY(50px);
+        }
+        
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: 60px;
+            margin-right: auto;
+        }
+        
+        .timeline-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+        
+        .timeline-company {
+            color: #6e44ff;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        /* Responsive Timeline */
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 30px;
+                top: 70px;
+            }
+            
+            .timeline-dot {
+                left: 30px;
+                top: 40px;
+            }
+            
+            .timeline-date {
+                left: 0;
+                right: 0;
+                top: -35px;
+                bottom: 40px;
+                margin: 0 auto;
+            }
+            
+            .timeline-item {
+                padding-top: 3rem;
+                margin-bottom: 6rem;
+            }
+            
+            .timeline-item:first-child {
+                padding-top: 1rem;
+            }
+            
+            .timeline-item:nth-child(even) .timeline-content {
+                margin-left: 90px;
+                margin-right: 0;
+            }
+            
+            .timeline-item:nth-child(even) .timeline-date {
+                left: 0;
+                right: auto;
+                margin: 0 auto;
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Featured Section Styles */
+        .featured-section {
+            padding: 6rem 2rem;
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Show 2 projects side by side */
+            gap: 2rem; /* Space between project cards */
+            margin-top: 2rem; /* Space above the grid */
+        }
+        
+        .featured-card {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: rgba(255, 255, 255, 0.03);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            height: 100%;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .featured-card.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .featured-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card-image {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+        }
+        
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+        
+        .featured-card:hover .card-image img {
+            transform: scale(1.1);
+        }
+        
+        .card-overlay {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            z-index: 1;
+            transition: background-color 0.3s, color 0.3s;
+            width: 80px; /* Fixed width for consistent size */
+            text-align: center; /* Center text in tag */
+        }
+        
+        .featured-card:hover .card-overlay {
+            background-color: white;
+        }
+        
+        .featured-card:hover .card-overlay span {
+        }
+        
+        .card-content {
+            padding: 1.5rem;
+        }
+        
+        .card-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+            transition: color 0.3s ease;
+        }
+        
+        .featured-card:hover .card-content h3 {
+            color: #6e44ff;
+        }
+        
+        .card-content p {
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .card-link {
+            display: inline-flex;
+            align-items: center;
+            color: #6e44ff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .card-link::after {
+            content: '→';
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+        
+        .featured-card:hover .card-link::after {
+            transform: translateX(5px);
+        }
+        
+        /* Project card specific styles */
+        .project-card .card-overlay {
+            background-color: rgba(110, 68, 255, 0.9);
+            color: white;
+        }
+
+        .project-card:hover .card-overlay {
+            color: #6e44ff; /* Purple color on hover */
+        }
+        
+        /* Blog card specific styles */
+        .blog-card .card-overlay {
+            background-color: rgba(255, 165, 0, 0.9); /* Orange background */
+            color: white;
+        }
+        
+        .blog-card:hover .card-overlay {
+            color: orange; /* Orange color on hover */
+        }
+        
+        @media (max-width: 768px) {
+            .featured-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Add this new style for the featured description */
+        .featured-description {
+            font-size: 1.2rem; /* Adjust font size */
+            color: #fff; /* Change color for minimalism */
+            text-align: center; /* Center the text */
+            margin-bottom: 3rem; /* Space out from the cards */
+        }
+        
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Show 2 blogs side by side */
+            gap: 2rem; /* Space between blog cards */
+            margin-top: 2rem; /* Space above the blog section */
+        }
+        
+        .blog-tag {
+            background-color: orange; /* Orange background */
+            color: white; /* White text */
+            padding: 0.5rem 1rem; /* Padding for the tag */
+            border-radius: 5px; /* Rounded corners */
+            transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+        }
+        
+        .blog-tag:hover {
+            background-color: white; /* Change background to white on hover */
+            color: orange; /* Change text to orange on hover */
+        }
+        
+        /* Hero buttons styling */
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .hero-btn {
+            padding: 0.8rem 1.5rem;
+            background-color: rgba(110, 68, 255, 0.2);
+            color: #fff;
+            border: 1px solid rgba(110, 68, 255, 0.5);
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .hero-btn:hover {
+            background-color: rgba(110, 68, 255, 0.8);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="logo">Ranjith Ram</div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section class="parallax-hero">
+            <video class="video-background" autoplay loop muted playsinline>
+                <source src="assets/videos/hero-video.mp4" type="video/mp4">
+                <!-- Fallback for browsers that don't support video -->
+                Your browser does not support the video tag.
+            </video>
+            <div class="hero-content">
+                <img src="assets/images/headshot.jpg" alt="Ranjith Ram" class="profile-image">
+                <h1 class="typewriter-text" id="typewriter"></h1>
+                <p class="description">I love everything tech, data and cars.</p>
+                <div class="hero-buttons">
+                    <a href="assets/resume.pdf" target="_blank" class="hero-btn">Resume</a>
+                    <a href="content.html" class="hero-btn">AI Content</a>
+                    <a href="#featured-section" class="hero-btn">Featured</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Career Timeline Section -->
+        <section class="timeline-section">
+            <div class="container">
+                <h2 class="section-title">My Career Journey</h2>
+                <div class="timeline">
+                    <!-- Timeline Item 1 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">Aug 2021 - Present</div>
+                        <div class="timeline-content">
+                            <h3>Data Engineer II</h3>
+                            <p class="timeline-company">eClinicalWorks</p>
+                            <p>Working with healthcare data systems and analytics platforms in Seattle, Washington. Developing and maintaining data pipelines and infrastructure for clinical applications.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item 2 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">Jan 2021 - Aug 2023</div>
+                        <div class="timeline-content">
+                            <h3>Data Engineer, SQL</h3>
+                            <p class="timeline-company">Upwork (Freelance)</p>
+                            <p>Freelance projects focusing on data warehousing, data visualization, and API integration. Successfully delivered multiple projects on time emphasizing reliability, efficiency, and simplicity. Skills: SQL, ETL, Python, Node.JS, REST, Azure.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item 3 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">Jan 2021 - Jul 2021</div>
+                        <div class="timeline-content">
+                            <h3>Co President</h3>
+                            <p class="timeline-company">DubsTech</p>
+                            <p>Managed a cross-functional team of 10 in 5 departments to run the largest tech student organization at UW. Organized Protothon, a UX Design hackathon with 900+ participants, growing revenue by 3500%.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item 4 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">Sep 2020 - Jun 2021</div>
+                        <div class="timeline-content">
+                            <h3>Teaching Assistant</h3>
+                            <p class="timeline-company">University of Washington Information School</p>
+                            <p>Teaching assistant for INFO 200, an introductory to Informatics course that focuses on providing the foundations for information systems. Taught weekly lab sessions, established data science lab works, and mentored students on their final projects.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item 5 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">Mar 2020 - Jan 2021</div>
+                        <div class="timeline-content">
+                            <h3>Head of Data Science</h3>
+                            <p class="timeline-company">DubsTech</p>
+                            <p>Led the data science department at DubsTech, organizing workshops and events focused on data science and analytics for University of Washington students.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item 6 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">Jun 2020 - Aug 2020</div>
+                        <div class="timeline-content">
+                            <h3>Data Analyst - Corporate Strategy Intern</h3>
+                            <p class="timeline-company">HCL Technologies</p>
+                            <p>Researched and analyzed education sectors to help establish the HCL TechBee program. Interpreted over 10 million rows of data using Python, Excel, and PowerBI. Automated HR recruitment files, increasing efficiency by 90%.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item 7 -->
+                    <!-- <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">Nov 2019 - Mar 2020</div>
+                        <div class="timeline-content">
+                            <h3>Instructor</h3>
+                            <p class="timeline-company">DubsTech</p>
+                            <p>Taught technical workshops and courses for students at the University of Washington, focusing on data science and programming skills.</p>
+                        </div>
+                    </div> -->
+                    
+                    <!-- Timeline Item 8 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">Sep 2019 - Jan 2020</div>
+                        <div class="timeline-content">
+                            <h3>Full-Stack Developer</h3>
+                            <p class="timeline-company">Grey Matters Journal</p>
+                            <p>Designed and implemented a website for the Grey Matters Journal, a neuroscience outreach club at UW, with a net outreach of 10,000+ users. Created a Content Management System using a cloud database and incorporated industry-standard UI/UX in compliance with disability regulations.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item 9 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">Jan 2018 - Mar 2019</div>
+                        <div class="timeline-content">
+                            <h3>Research Assistant</h3>
+                            <p class="timeline-company">UW Aeronautical Laboratory</p>
+                            <p>Conducted research and assisted with aeronautical experiments and data analysis at the University of Washington's Aeronautical Laboratory.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item 10 -->
+                    <!-- <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">Jan 2018 - Apr 2018</div>
+                        <div class="timeline-content">
+                            <h3>Marketing and Distribution Manager</h3>
+                            <p class="timeline-company">The Daily UW</p>
+                            <p>Developed and incorporated marketing strategies to distribute 1000+ copies of The Daily's specialized edition newspaper for football and basketball games during the college games season.</p>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Section -->
+        <section id="featured-section" class="featured-section">
+            <div class="container">
+                <h2 class="section-title">Featured</h2>
+                <p class="featured-description">Explore my latest projects and blogs.</p>
+                <div class="featured-grid">
+                    <!-- Featured Project 1 -->
+                    <div class="featured-card project-card">
+                        <div class="card-image">
+                            <img src="assets/images/stopter.jpg" alt="Stopter App">
+                            <div class="card-overlay">
+                                <span>Project</span>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3>Stopter</h3>
+                            <p>An app helping people overcome speech challenges through AI-powered voice modulation courses. Features a machine learning algorithm that customizes learning tracks based on user progress.</p>
+                            <a href="projects.html" class="card-link">View Project</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Featured Project 2 -->
+                    <div class="featured-card project-card">
+                        <div class="card-image">
+                            <img src="assets/images/mentorUp.jpg" alt="MentorUp Project">
+                            <div class="card-overlay">
+                                <span>Project</span>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3>MentorUp</h3>
+                            <p>A React.JS platform supporting UN SDG 4 by connecting underprivileged students with mentors sharing similar interests and ambitions to provide quality education and guidance.</p>
+                            <a href="https://spicyfood-mentorup.web.app" target="_blank" class="card-link">View Project</a>
+                        </div>
+                    </div>
+
+                    <!-- Blog Card 1 -->
+                    <div class="featured-card blog-card">
+                        <div class="card-image">
+                            <img src="assets/images/drones.jpg" alt="UAV Reliability Blog">
+                            <div class="card-overlay">
+                                <span>Blog</span>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3>Reliability of UAV's in the modern era</h3>
+                            <p>An in-depth analysis of drone reliability factors, safety considerations, and the evolving regulatory landscape for unmanned aerial vehicles.</p>
+                            <a href="https://medium.com/@ranjith.ramkishore/how-reliable-are-drones-e8ff812d8d65" target="_blank" class="card-link">Read Article</a>
+                        </div>
+                    </div>
+
+                    <!-- Blog Card 2 -->
+                    <div class="featured-card blog-card">
+                        <div class="card-image">
+                            <img src="assets/images/cooking.jpg" alt="Cooking Blog">
+                            <div class="card-overlay">
+                                <span>Blog</span>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3>Finding Therapy in the Kitchen</h3>
+                            <p>A personal exploration of cooking as therapy, from Instagram recipe discoveries to vegetarian Indian cuisine experiments with diverse protein sources.</p>
+                            <a href="https://medium.com/@ranjith.ramkishore/finding-therapy-in-the-kitchen-my-journey-through-flavors-b17d7799196a" target="_blank" class="card-link">Read Article</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/ranjithr99/" target="_blank">LinkedIn</a>
+                <a href="#" target="_blank">GitHub</a>
+                <a href="#" target="_blank">Twitter</a>
+            </div>
+            <p>&copy; 2024 Ranjith Ram. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/animations.js"></script>
+    <script>
+        // Typewriter effect
+        const typewriterElement = document.getElementById('typewriter');
+        const phrases = ["Hello 👋", "I am Ranjith", "Nice to meet you!"];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typingSpeed = 100;
+        
+        function typeWriter() {
+            const currentPhrase = phrases[phraseIndex];
+            
+            if (isDeleting) {
+                // Deleting text
+                typewriterElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+                typingSpeed = 50; // Faster when deleting
+            } else {
+                // Typing text
+                typewriterElement.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+                typingSpeed = 150; // Slower when typing
+            }
+            
+            // If finished typing the phrase
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                // Pause at the end of typing
+                isDeleting = true;
+                typingSpeed = 1500; // Pause before deleting
+            } 
+            // If finished deleting the phrase
+            else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                // Move to next phrase
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                // Pause before typing next phrase
+                typingSpeed = 500;
+            }
+            
+            setTimeout(typeWriter, typingSpeed);
+        }
+        
+        // Smooth scrolling for anchor links
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    // Only scroll if it's not just "#" (which would scroll to top)
+                    if (targetId === "#") return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Ensure page starts at the top when loaded
+            if (window.location.hash === "") {
+                window.scrollTo(0, 0);
+            }
+        });
+        
+        // Start the typewriter effect when the page loads
+        window.onload = typeWriter;
+        
+        // Timeline animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            
+            // Create an intersection observer
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const item = entry.target;
+                        const content = item.querySelector('.timeline-content');
+                        
+                        // Add animation class with delay based on item index
+                        setTimeout(() => {
+                            content.style.opacity = '1';
+                            content.style.transform = 'translateY(0) translateX(0)';
+                        }, item.dataset.index * 100); // Reduce delay between items
+                        
+                        // Unobserve after animation
+                        observer.unobserve(item);
+                    }
+                });
+            }, {
+                threshold: 0.1, // Lower threshold to trigger earlier
+                rootMargin: "0px 0px -10% 0px" // Trigger before item is fully in view
+            });
+            
+            // Observe each timeline item and set data-index
+            timelineItems.forEach((item, index) => {
+                item.dataset.index = index;
+                observer.observe(item);
+            });
+            
+            // Add pulse animation to timeline dots
+            const timelineDots = document.querySelectorAll('.timeline-dot');
+            timelineDots.forEach((dot, index) => {
+                dot.style.animationDelay = `${index * 0.2}s`; // Reduce delay between dot animations
+                dot.style.animation = 'pulse 2s infinite';
+            });
+        });
+        
+        // Pulse animation for timeline dots
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0% {
+                    box-shadow: 0 0 0 0 rgba(110, 68, 255, 0.7);
+                }
+                70% {
+                    box-shadow: 0 0 0 10px rgba(110, 68, 255, 0);
+                }
+                100% {
+                    box-shadow: 0 0 0 0 rgba(110, 68, 255, 0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Featured cards animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const featuredCards = document.querySelectorAll('.featured-card');
+            
+            const featuredObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        // Add animated class with staggered delay
+                        setTimeout(() => {
+                            entry.target.classList.add('animated');
+                        }, index * 150);
+                        
+                        // Unobserve after animation
+                        featuredObserver.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.2,
+                rootMargin: "0px 0px -10% 0px"
+            });
+            
+            // Observe each featured card
+            featuredCards.forEach((card) => {
+                featuredObserver.observe(card);
+            });
+        });
+    </script>
+</body>
+</html> 

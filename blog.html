@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Blog</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <style>
+        .blog-grid {
+            max-width: 1200px;
+            margin: 120px auto 0;
+            padding: 0 2rem;
+        }
+
+        .blog-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .blog-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 1rem;
+        }
+
+        .blog-header h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: #6e44ff;
+        }
+
+        .blog-header p {
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        .blog-post {
+            margin-bottom: 4rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .blog-post:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .blog-post img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .post-meta {
+            font-size: 0.9rem;
+            color: #6e44ff;
+            margin-bottom: 1rem;
+        }
+
+        .blog-post h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .blog-post p {
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .read-more {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: #6e44ff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .read-more:hover {
+            background: #5633cc;
+            transform: translateY(-2px);
+        }
+
+        .blog-title {
+            margin-bottom: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="logo">Ranjith Ram</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="blog.html" class="active">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main class="blog-grid">
+        <div class="blog-header">
+            <h1>Blog</h1>
+            <p>Thoughts, stories and ideas about technology, design and more.</p>
+        </div>
+
+        <!-- Blog Section -->
+        <section class="blog-section" style="margin-top: 3rem;">
+            <div class="blog-cards">
+                <!-- Drone Reliability Blog -->
+                <article class="blog-post">
+                    <img src="assets/images/drones.jpg" alt="UAV Reliability Blog">
+                    <div class="post-meta">April 10, 2024</div>
+                    <h2>Reliability of UAV's in the modern era</h2>
+                    <p>An in-depth analysis of drone reliability factors, safety considerations, and the evolving regulatory landscape for unmanned aerial vehicles.</p>
+                    <a href="https://medium.com/@ranjith.ramkishore/how-reliable-are-drones-e8ff812d8d65" target="_blank" class="read-more">Read More</a>
+                </article>
+
+                <article class="blog-post">
+                    <img src="assets/images/cooking.jpg" alt="Cooking Blog">
+                    <div class="post-meta">Mar 2, 2025</div>
+                    <h2>Finding Therapy in the Kitchen: My Journey Through Flavors</h2>
+                    <p>This personal blog explores cooking as a form of therapy, highlighting my love for Instagram recipe discoveries and journey as a vegetarian Indian experimenting with diverse protein sources. Written in a fun, casual tone, it celebrates the mindfulness and joy found in kitchen adventures, both successful and not-so-successful.</p>
+                    <a href="https://medium.com/@ranjith.ramkishore/finding-therapy-in-the-kitchen-my-journey-through-flavors-b17d7799196a" target="_blank" class="read-more">Read More</a>
+                </article>
+
+                <article class="blog-post">
+                    <img src="https://source.unsplash.com/random/800x600?tech" alt="Blog Post Image">
+                    <div class="post-meta">December 15, 2023</div>
+                    <h2>The Future of Web Development</h2>
+                    <p>Exploring the latest trends in web development, from AI-powered interfaces to the rise of Web3 technologies. What does the future hold for developers and users alike?</p>
+                    <a href="#" class="read-more">Read More</a>
+                </article>
+
+                <article class="blog-post">
+                    <img src="https://source.unsplash.com/random/800x600?coding" alt="Blog Post Image">
+                    <div class="post-meta">December 10, 2023</div>
+                    <h2>Mastering Creative Design Process</h2>
+                    <p>A deep dive into my creative process, tools, and techniques I use to bring digital experiences to life. Learn how to blend aesthetics with functionality.</p>
+                    <a href="#" class="read-more">Read More</a>
+                </article>
+
+                <article class="blog-post">
+                    <img src="https://source.unsplash.com/random/800x600?design" alt="Blog Post Image">
+                    <div class="post-meta">December 5, 2023</div>
+                    <h2>Building Accessible Websites</h2>
+                    <p>Why accessibility should be at the forefront of web development and design. Practical tips and best practices for creating inclusive digital experiences.</p>
+                    <a href="#" class="read-more">Read More</a>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/ranjithr99/" target="_blank">LinkedIn</a>
+                <a href="#" target="_blank">GitHub</a>
+                <a href="#" target="_blank">Twitter</a>
+            </div>
+            <p>&copy; 2024 Ranjith Ram. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html> 
